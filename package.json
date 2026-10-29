@@ -1,0 +1,7 @@
+{
+  "name": "perfume-finder",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Quiz-based fragrance recommender with procedural 3D bottles. Runs entirely in the browser."
+}
