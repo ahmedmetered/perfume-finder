@@ -1,15 +1,22 @@
-// App orchestration: quiz state, real-time local analysis, results.
-// All scoring runs in the browser on every keystroke. Nothing leaves the page.
+// App orchestration: the dive. Quiz state, real-time local analysis, results.
+// Every answer deepens the page's water and retints its glow toward the
+// current best match. All scoring runs in the browser; nothing leaves the page.
 
 import { FRAGRANCES, FAMILIES, OCCASION_LABELS } from './data.js';
 import { analyzeText } from './keywords.js';
-import { buildProfile, rank } from './scoring.js';
+import { buildProfile, rank, profileSummary } from './scoring.js';
 import { BottleViewer, snapshotBottle } from './bottles.js';
 
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// depth of each stage of the dive, for the meter
+const DEPTHS = ['surface · 0 m', '12 m · shaded', '40 m · the thermocline', '130 m · twilight', '800 m · midnight', '2,400 m · the abyssal plain', '3,700 m · your scent'];
 
 // ---------- quiz definition ----------
+
+const ORDINALS = ['Question one', 'Question two', 'Question three', 'Question four', 'Question five', 'Question six'];
 
 const STEPS = [
   {
@@ -79,59 +86,88 @@ function occHint(v) {
 
 const state = {
   step: 0,
-  answers: {},          // { budget: '2', occasions: [], ... }
-  texts: {},            // per-step free text
+  answers: {},
+  texts: {},
   finished: false,
-  focus: null,          // fragrance id shown in the hero
-  viewer: null
+  viewer: null,
+  heroViewer: null,
+  heroTimer: 0
 };
 
 let profile = buildProfile({}, []);
 let ranking = rank(profile);
 
-// ---------- theme (carried over from the portfolio design system) ----------
+// ---------- analysis core ----------
 
-(function initTheme() {
-  const t = localStorage.getItem('pf-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  document.documentElement.dataset.theme = t;
-  syncThemeMeta();
-})();
-function syncThemeMeta() {
-  const m = $('meta[name="theme-color"]');
-  if (m) m.content = document.documentElement.dataset.theme === 'dark' ? '#0A0A0C' : '#F5F5F7';
+function analyze() {
+  return analyzeText(Object.values(state.texts).join(' '));
 }
-window.toggleTheme = function () {
-  const t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-  document.documentElement.dataset.theme = t;
-  localStorage.setItem('pf-theme', t);
-  syncThemeMeta();
-  if (state.viewer) state.viewer.setBackdrop(t === 'dark');
-};
+
+function updateAnalysis() {
+  profile = buildProfile(state.answers, [analyze()]);
+  ranking = rank(profile);
+  const juice = typeof ranking[0].frag.bottle.juice === 'string'
+    ? ranking[0].frag.bottle.juice : ranking[0].frag.bottle.juice.from;
+  document.documentElement.style.setProperty('--glow', juice);
+  renderLive();
+  if (state.finished) renderResults(false);
+}
+
+function setDepth(i) {
+  const d = Math.min(1, i / (DEPTHS.length - 1));
+  document.body.style.setProperty('--depth', d.toFixed(3));
+  $('#depth-read').textContent = DEPTHS[Math.min(i, DEPTHS.length - 1)];
+  $('#rail-bead').style.transform = `translateY(${(d * 190).toFixed(0)}px)`;
+}
+
+// ---------- live shelf (the wall) ----------
+
+function renderLive() {
+  const top = ranking.slice(0, 3);
+  const rows = $$('#live-rows .live-row');
+  top.forEach((r, i) => {
+    const row = rows[i];
+    const juice = typeof r.frag.bottle.juice === 'string' ? r.frag.bottle.juice : r.frag.bottle.juice.from;
+    $('.live-name', row).textContent = r.frag.name;
+    $('.live-house', row).textContent = r.frag.house;
+    $('.live-pct', row).textContent = r.pct + '%';
+    $('.live-bar', row).style.setProperty('--lc', juice);
+    $('.live-bar i', row).style.width = r.pct + '%';
+    row.style.setProperty('--lc', juice);
+  });
+  const tags = profile.tags;
+  $('#live-tags').innerHTML = tags.length
+    ? tags.map(t => `<span class="tag">${t}</span>`).join('')
+    : '<span class="live-empty">type or answer to steer the shelf</span>';
+}
 
 // ---------- quiz rendering ----------
 
 const quizEl = $('#quiz');
 const stepCard = $('#step-card');
-const progressEl = $('#progress');
 
 function startQuiz() {
+  stopHero();
   quizEl.hidden = false;
-  $('#hero-cta').hidden = true;
+  $('#hero-cta').innerHTML = '<button class="btn" id="resume-note">The dive is on — the shelf is below</button>';
   renderStep();
+  setDepth(1);
   quizEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function renderStep() {
   const step = STEPS[state.step];
-  const answered = Object.keys(state.answers).length;
-  progressEl.innerHTML = STEPS.map((s, i) =>
-    `<span class="seg${i < state.step ? ' done' : ''}${i === state.step ? ' now' : ''}"></span>`).join('');
-  $('#step-count').textContent = `Step ${state.step + 1} of ${STEPS.length}`;
+  $('#step-kicker').textContent = ORDINALS[state.step];
+  $('#step-count').textContent = `${state.step + 1} of ${STEPS.length}`;
+  $('#depthbar-fill').style.width = `${(state.step / STEPS.length) * 100}%`;
+  setDepth(state.step + 1);
 
   const multi = !!step.multi;
-  const selected = state.answers[step.key];
+  stepCard.classList.remove('step-anim');
+  void stepCard.offsetWidth; // restart the entrance animation
+  stepCard.classList.add('step-anim');
+
   stepCard.innerHTML = `
-    <p class="step-kicker">${step.multi ? 'multi-select' : 'pick one'}</p>
     <h3 class="step-title">${step.title}</h3>
     <p class="step-sub">${step.sub}</p>
     <div class="options" role="${multi ? 'group' : 'radiogroup'}" aria-label="${step.title}">
@@ -146,12 +182,12 @@ function renderStep() {
       <label for="free-text">or describe it in your own words</label>
       <input id="free-text" type="text" autocomplete="off" placeholder="${step.placeholder}"
         value="${(state.texts[step.key] || '').replace(/"/g, '&quot;')}">
-      <p class="freeform-note">Read locally against a keyword map, instantly. No API, nothing sent anywhere.</p>
+      <p class="freeform-note">What you pick above always wins; typed words only fill the gaps.</p>
     </div>
     <div class="step-nav">
       <button type="button" class="btn" id="back-btn" ${state.step === 0 ? 'disabled' : ''}>Back</button>
       <button type="button" class="btn primary" id="next-btn">
-        ${state.step === STEPS.length - 1 ? 'See my scent' : 'Next'}
+        ${state.step === STEPS.length - 1 ? 'See my scent' : 'Deeper'}
       </button>
     </div>`;
 
@@ -183,7 +219,7 @@ function renderStep() {
   $('#back-btn', stepCard).addEventListener('click', () => { if (state.step > 0) { state.step--; renderStep(); } });
   $('#next-btn', stepCard).addEventListener('click', () => {
     if (state.step === STEPS.length - 1) finish();
-    else { state.step++; renderStep(); quizEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+    else { state.step++; renderStep(); quizEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 }
 
@@ -192,47 +228,16 @@ function isSelected(step, v) {
   return Array.isArray(a) ? a.includes(v) : a === v;
 }
 
-// ---------- real-time analysis ----------
-
-function analyze() {
-  const allText = Object.values(state.texts).join(' ');
-  return analyzeText(allText);
-}
-
-function updateAnalysis() {
-  const hits = analyze();
-  profile = buildProfile(state.answers, [hits]);
-  ranking = rank(profile);
-  renderLive();
-  if (state.finished) renderResults(false);
-}
-
-function renderLive() {
-  const top = ranking.slice(0, 3);
-  const rows = $$('#live-rows .live-row');
-  top.forEach((r, i) => {
-    const row = rows[i];
-    $('.live-name', row).textContent = r.frag.name;
-    $('.live-house', row).textContent = r.frag.house;
-    $('.live-pct', row).textContent = r.pct + '%';
-    $('.live-bar i', row).style.width = r.pct + '%';
-  });
-  const tags = profile.tags;
-  const tagsEl = $('#live-tags');
-  tagsEl.innerHTML = tags.length
-    ? tags.map(t => `<span class="tag">${t}</span>`).join('')
-    : '<span class="live-empty">type or answer to steer the shelf</span>';
-  $('#live-count').textContent = `${profile.answered} of 6 answered`;
-}
-
-// ---------- results ----------
+// ---------- results: the abyss ----------
 
 function finish() {
   state.finished = true;
   quizEl.hidden = true;
-  $('#results').hidden = false;
+  const results = $('#results');
+  results.hidden = false;
+  setDepth(6);
   renderResults(true);
-  $('#results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  results.scrollIntoView({ behavior: 'smooth', block: 'start' });
   queueSnapshots();
 }
 
@@ -240,29 +245,61 @@ function initViewer() {
   if (state.viewer) return;
   try {
     state.viewer = new BottleViewer($('#bottle-canvas'));
-    $('#stage').classList.add('live-3d');
-  } catch (err) {
-    $('#stage').classList.add('no-3d');
-    $('#stage').innerHTML = '<div class="no3d-note">3D preview unavailable on this browser. The shelf below still works.</div>';
+    $('#bottle-wrap').classList.add('live-3d');
+  } catch {
+    $('#bottle-wrap').innerHTML = '<div class="no3d-note">3D preview unavailable on this browser. The shelf below still works.</div>';
     state.viewer = null;
   }
 }
 
-const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function countUp(el, to) {
+  if (reducedMotion) { el.textContent = to; return; }
+  const t0 = performance.now(), dur = 1300;
+  const tick = now => {
+    const k = Math.min(1, (now - t0) / dur);
+    const e = 1 - Math.pow(1 - k, 3);
+    el.textContent = Math.round(e * to);
+    if (k < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+function fillHero(r, withViewer) {
+  const f = r.frag;
+  countUp($('#match-num'), r.pct);
+  $('#match-note').textContent = r.overBudget ? ' · over your budget, shown lower' : '';
+  $('#r-name').textContent = f.name;
+  $('#r-house').innerHTML = `<b>${f.house}</b> · ${f.year} · ${FAMILIES[mainFamily(f)].label}`;
+  $('#r-whys').innerHTML = r.whys.map(w => `<span class="tag">${w}</span>`).join('');
+  $('#r-tags').innerHTML = profileSummary(profile).map(c => `<span class="tag">${c}</span>`).join('')
+    || '<span class="tag">blank quiz, so this is the crowd favorite</span>';
+  $('#r-blurb').textContent = f.blurb;
+  $('#r-tier').textContent = ['under €50', '€50 to €120', '€120 to €250'][f.tier - 1];
+  $('#r-intensity').innerHTML = '●'.repeat(f.intensity) + '<span class="dim-dots">' + '●'.repeat(3 - f.intensity) + '</span>';
+  $('#r-depth').innerHTML = `Arrived at <b>3,700 m</b>`;
+  const pyr = [['Top', f.notes.top], ['Heart', f.notes.heart], ['Base', f.notes.base]];
+  $('#r-pyramid').innerHTML = pyr.map(([t, notes]) => `
+    <div class="pyr-col"><h5>${t}</h5><p>${notes.join(', ')}</p></div>`).join('');
+  if (withViewer) {
+    initViewer();
+    if (state.viewer) {
+      state.viewer.resize();
+      state.viewer.setFrag(f);
+      state.viewer.setAutoRotate(!reducedMotion);
+    }
+  } else if (state.viewer) state.viewer.setFrag(f);
+}
+
+function mainFamily(frag) {
+  return Object.entries(frag.mix).sort((a, b) => b[1] - a[1])[0][0];
+}
 
 function renderResults(withViewer) {
   const top = ranking[0];
-  state.focus = top.frag.id;
-  $('#results-kicker').textContent =
-    profile.answered === 0 ? 'Based on a completely blank quiz, here is the crowd-pleaser:'
-      : profile.tags.length && profile.answered <= 2 ? 'Early read from what you gave me:'
-        : 'Your top match:';
-
   fillHero(top, withViewer);
 
-  const runners = ranking.slice(1, 3);
-  $('#runners').innerHTML = runners.map((r, i) => `
-    <button type="button" class="runner card" data-id="${r.frag.id}" style="--i:${i}">
+  $('#runners').innerHTML = ranking.slice(1, 3).map((r, i) => `
+    <button type="button" class="runner" data-id="${r.frag.id}" style="--i:${i}">
       <img alt="${r.frag.name} bottle" data-snap="${r.frag.id}">
       <div class="runner-info">
         <span class="match-num">${r.pct}%</span>
@@ -294,39 +331,12 @@ function renderResults(withViewer) {
   observeReveals();
 }
 
-function mainFamily(frag) {
-  return Object.entries(frag.mix).sort((a, b) => b[1] - a[1])[0][0];
-}
-
-function fillHero(r, withViewer) {
-  const f = r.frag;
-  $('#match-big').innerHTML = `${r.pct}<span>% match</span>`;
-  $('#r-name').textContent = `${f.name}`;
-  $('#r-house').textContent = `${f.house} · ${f.year} · ${FAMILIES[mainFamily(f)].label}`;
-  $('#r-whys').innerHTML = r.whys.map(w => `<span class="tag">${w}</span>`).join('');
-  $('#r-blurb').textContent = f.blurb;
-  $('#r-tier').textContent = ['under €50', '€50 to €120', '€120 to €250'][f.tier - 1];
-  $('#r-intensity').innerHTML = '●'.repeat(f.intensity) + '<span class="dim-dots">' + '●'.repeat(3 - f.intensity) + '</span>';
-  const pyr = [['Top', f.notes.top], ['Heart', f.notes.heart], ['Base', f.notes.base]];
-  $('#r-pyramid').innerHTML = pyr.map(([t, notes]) => `
-    <div class="pyr-col"><h5>${t}</h5><p>${notes.join(', ')}</p></div>`).join('');
-  if (withViewer) {
-    initViewer();
-    if (state.viewer) {
-      state.viewer.resize();
-      state.viewer.setFrag(f);
-      state.viewer.setAutoRotate(!reducedMotion);
-    }
-  } else if (state.viewer) state.viewer.setFrag(f);
-}
-
 function focusFrag(id) {
   const r = ranking.find(x => x.frag.id === id);
   if (!r) return;
   fillHero(r, !state.viewer);
 }
 
-// lazy snapshot hydration for thumbs
 function hydrateSnaps() {
   $$('img[data-snap]').forEach(img => {
     const frag = FRAGRANCES.find(f => f.id === img.dataset.snap);
@@ -335,7 +345,6 @@ function hydrateSnaps() {
     catch { img.replaceWith(fallbackGlyph(frag)); }
   });
 }
-
 function queueSnapshots() { hydrateSnaps(); }
 
 function fallbackGlyph(frag) {
@@ -352,10 +361,34 @@ function retake() {
   state.texts = {};
   state.finished = false;
   updateAnalysis();
+  setDepth(0);
   $('#results').hidden = true;
   quizEl.hidden = false;
   renderStep();
   quizEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ---------- landing hero: a slow tour of the shelf ----------
+
+const TOUR = ['br540', 'bleu-de-chanel', 'le-male', 'sauvage', 'la-vie-est-belle'];
+let tourIdx = 0;
+
+function startHero() {
+  if (reducedMotion) return;
+  try {
+    state.heroViewer = new BottleViewer($('#hero-canvas'));
+    state.heroViewer.setFrag(FRAGRANCES.find(f => f.id === TOUR[0]));
+    state.heroViewer.resize();
+    state.heroTimer = setInterval(() => {
+      tourIdx = (tourIdx + 1) % TOUR.length;
+      state.heroViewer.setFrag(FRAGRANCES.find(f => f.id === TOUR[tourIdx]));
+    }, 6500);
+  } catch { /* hero bottle is decoration; the quiz works without it */ }
+}
+
+function stopHero() {
+  clearInterval(state.heroTimer);
+  if (state.heroViewer) { state.heroViewer.dispose(); state.heroViewer = null; }
 }
 
 // ---------- staggered reveals ----------
@@ -375,16 +408,22 @@ function observeReveals() {
 
 $('#start-btn').addEventListener('click', startQuiz);
 $('#retake-btn').addEventListener('click', retake);
-$('#nav-quiz').addEventListener('click', (e) => {
-  if (!quizEl.hidden) return; // anchor scrolls normally
-  e.preventDefault();
-  if (!state.finished) return startQuiz();
-  quizEl.hidden = false;
-  renderStep();
-  quizEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
+$('#nav-quiz')?.addEventListener('click', e => e.preventDefault());
+startHero();
 renderLive();
 observeReveals();
 
+// labels bake the display face into canvas textures; redraw the tour once the
+// webfont has actually landed so the first bottles aren't set in the fallback
+document.fonts.ready.then(() => {
+  if (state.heroViewer && !reducedMotion) {
+    state.heroViewer.setFrag(FRAGRANCES.find(f => f.id === TOUR[tourIdx]));
+  }
+});
+
 // test hook for the headless e2e drive; harmless in production
-window.__pf = { get state() { return state; }, get profile() { return profile; }, get ranking() { return ranking; } };
+window.__pf = {
+  get state() { return state; },
+  get profile() { return profile; },
+  get ranking() { return ranking; }
+};

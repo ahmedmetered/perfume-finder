@@ -1,6 +1,6 @@
 // Sanity tests for the pure logic: data integrity, keyword map, scoring.
 // Run: node scripts/test.mjs
-import { FRAGRANCES, FAMILIES, FAMILY_AFFINITY, OCCASION_LABELS } from '../js/data.js';
+import { FRAGRANCES, FAMILIES, FAMILY_AFFINITY, OCCASION_LABELS, DESIGNS } from '../js/data.js';
 import { KEYWORDS, analyzeText } from '../js/keywords.js';
 import { buildProfile, rank, scoreFragrance } from '../js/scoring.js';
 
@@ -39,6 +39,35 @@ for (const f of FRAGRANCES) {
   check(`${f.id}: blurb present`, typeof f.blurb === 'string' && f.blurb.length > 10);
   check(`${f.id}: pop 1..5`, f.pop >= 1 && f.pop <= 5);
 }
+
+// --- bespoke bottle designs ---
+const FORMS = new Set(['column', 'slab', 'flask', 'torso', 'orb', 'ingot', 'taper', 'star', 'ribbed', 'urn']);
+const CAP_FORMS = new Set(['none', 'puck', 'column', 'sphere', 'dome', 'disc', 'cone']);
+const CAP_MATS = new Set(['gold', 'silver', 'black', 'white', 'pearl', 'navy', 'red']);
+const FINISHES = new Set(['clear', 'frosted', 'tinted', 'opaque']);
+check('every fragrance has a bespoke design', FRAGRANCES.every(f => DESIGNS[f.id]), FRAGRANCES.filter(f => !DESIGNS[f.id]).map(f => f.id).join(','));
+for (const [id, d] of Object.entries(DESIGNS)) {
+  check(`${id} design: form valid`, FORMS.has(d.form), d.form);
+  check(`${id} design: finish valid`, FINISHES.has(d.glass));
+  check(`${id} design: juice present`, typeof d.juice === 'string' || (d.juice && d.juice.from && d.juice.to));
+  check(`${id} design: cap valid`, !d.cap || (CAP_FORMS.has(d.cap.form) && (d.cap.form === 'none' || CAP_MATS.has(d.cap.material))));
+  check(`${id} design: label valid`, !d.label || ['none', 'band', 'plate', 'plaque', 'tall'].includes(d.label));
+}
+check('every family appears as a primary', FAMILY_KEYS.filter(k => FRAGRANCES.some(f => Object.keys(f.mix)[0] === k)).length === FAMILY_KEYS.length);
+
+// --- scoring precedence: buttons beat typed words ---
+import('../js/keywords.js').then(({ analyzeText }) => {
+  const compromised = buildProfile(
+    { budget: '1', family: 'citrus', audience: 'm', occasions: ['casual'], intensity: 2 },
+    [analyzeText('something designer and classic')]
+  );
+  check('text cannot raise an explicit budget', compromised.tierCeiling === 1);
+  check('text cannot override explicit intensity', compromised.intensityTarget === 2);
+  const r = rank(compromised);
+  check('no over-budget in top3 after compromised text', r.slice(0, 3).every(x => !x.overBudget));
+  const silent = buildProfile({}, [analyzeText('expensive niche splurge')]);
+  check('text fills budget when buttons silent', silent.tierCeiling === 3);
+});
 
 // coverage: every quiz option should be reachable by at least a few fragrances
 const seasonsCovered = SEASON_KEYS.filter(s => FRAGRANCES.filter(f => f.seasons[s] >= .7).length >= 5);

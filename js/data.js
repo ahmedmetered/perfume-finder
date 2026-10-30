@@ -390,3 +390,54 @@ export const FRAGRANCES = [
     bottle: { shape: 'slab', cap: 'puck', metal: 'silver', juice: '#F1D4D2' }
   }
 ];
+
+// Bespoke 3D design per bottle: form, glass finish, juice, cap and label echo
+// each real bottle's iconic look. Rendered by js/bottles.js.
+//
+// form:    column | slab | flask | torso | orb | ingot | taper | star | ribbed | urn
+// glass:   clear | frosted | tinted | opaque   (+ color when tinted/opaque)
+// juice:   '#hex' or { from, to } vertical gradient
+// cap:     { form: none|puck|column|sphere|dome|disc|cone, material: gold|silver|black|pearl|navy|red, h, r }
+// label:   none | band | plate | plaque | tall    (+ ink color, plate color)
+export const DESIGNS = {
+  'allure-homme-sport': { form: 'column', h: 2.25, r: .55, glass: 'clear', cool: true, juice: { from: '#E8C24A', to: '#F6E8B0' }, cap: { form: 'puck', material: 'silver', h: .3, r: .26 }, label: 'band', ink: '#31435C' },
+  'ck-one': { form: 'column', h: 2.0, r: .58, glass: 'frosted', cool: true, juice: '#E9E2C8', cap: { form: 'column', material: 'silver', h: .38, r: .24 }, label: 'band', ink: '#3A3A3E' },
+  'light-blue': { form: 'column', h: 2.1, r: .56, glass: 'clear', juice: '#9FD8E8', cap: { form: 'puck', material: 'white', h: .26, r: .26 }, label: 'plate', ink: '#4A6E8A', plate: '#FDFDFB' },
+  'terre-hermes': { form: 'slab', h: 2.45, r: .5, scaleX: .72, glass: 'frosted', juice: '#B4561E', cap: { form: 'column', material: 'black', h: .42, r: .19 }, label: 'none', ring: 'silver' },
+  'acqua-di-gio': { form: 'slab', h: 2.2, r: .56, scaleX: .58, glass: 'clear', juice: '#8FD4DC', cap: { form: 'puck', material: 'navy', h: .3, r: .27 }, label: 'band', ink: '#2E4A66' },
+  'cool-water': { form: 'column', h: 2.15, r: .57, glass: 'tinted', color: '#9FD0E4', juice: '#7FC2DC', cap: { form: 'puck', material: 'silver', h: .28, r: .27 }, label: 'band', ink: '#1E4E66' },
+  'dylan-blue': { form: 'column', h: 2.3, r: .54, glass: 'tinted', color: '#3C6C9E', juice: '#2A4E78', cap: { form: 'puck', material: 'silver', h: .3, r: .26 }, ring: 'gold', label: 'band', ink: '#DDE8F2' },
+  'nautica-voyage': { form: 'flask', h: 2.0, r: .72, glass: 'clear', juice: '#A8D8CC', cap: { form: 'puck', material: 'silver', h: .26, r: .25 }, label: 'band', ink: '#1E5A50' },
+  'chanel-no5': { form: 'slab', h: 2.2, r: .58, scaleX: .68, glass: 'clear', juice: '#EBD9B4', cap: { form: 'column', material: 'white', h: .4, r: .2, scaleX: 1.1 }, label: 'plate', ink: '#1D1D1F', plate: '#FBFAF6' },
+  'miss-dior-bb': { form: 'flask', h: 2.1, r: .68, glass: 'clear', juice: '#EEB2C4', cap: { form: 'puck', material: 'silver', h: .24, r: .24 }, ring: 'gold', label: 'plate', ink: '#8A4E62', plate: '#FBF3F5' },
+  'chance-tendre': { form: 'orb', h: 1.9, r: .74, glass: 'clear', juice: '#F4C9D2', cap: { form: 'puck', material: 'silver', h: .22, r: .2 }, bandRings: ['silver'], label: 'band', ink: '#7A5E68' },
+  'ysl-libre': { form: 'slab', h: 2.55, r: .46, scaleX: .5, glass: 'clear', juice: { from: '#D8963C', to: '#F0C882' }, cap: { form: 'column', material: 'gold', h: .5, r: .2 }, label: 'none', ring: 'gold' },
+  'gucci-bloom': { form: 'column', h: 2.15, r: .56, glass: 'opaque', color: '#F0D2D8', juice: '#F0D2D8', cap: { form: 'puck', material: 'black', h: .3, r: .27 }, label: 'band', ink: '#6E4E56', plate: '#F6E4E8' },
+  'daisy': { form: 'orb', h: 1.95, r: .72, glass: 'frosted', color: '#F4EFE8', juice: '#F2E2A8', cap: { form: 'dome', material: 'silver', h: .3, r: .3 }, label: 'none' },
+  'narciso-for-her': { form: 'slab', h: 2.15, r: .54, scaleX: .6, glass: 'opaque', color: '#191319', juice: '#191319', cap: { form: 'puck', material: 'black', h: .22, r: .24 }, label: 'plate', ink: '#F2EEF2', plate: '#262028' },
+  'bleu-de-chanel': { form: 'column', h: 2.3, r: .55, glass: 'tinted', color: '#1E3A5E', juice: '#2E4E78', cap: { form: 'puck', material: 'black', h: .3, r: .27 }, label: 'none' },
+  'oud-wood': { form: 'column', h: 2.35, r: .5, glass: 'tinted', color: '#4A2E1C', juice: '#5A3A22', cap: { form: 'column', material: 'gold', h: .48, r: .18 }, label: 'none', ring: 'gold' },
+  'encre-noire': { form: 'taper', h: 2.4, r: .5, scaleX: .55, glass: 'opaque', color: '#15181A', juice: '#15181A', cap: { form: 'column', material: 'black', h: .34, r: .17 }, label: 'plate', ink: '#C9CDD4', plate: '#1E2226' },
+  'ysl-lhomme': { form: 'column', h: 2.25, r: .53, glass: 'clear', juice: '#E8DCB0', cap: { form: 'sphere', material: 'silver', h: .3, r: .24 }, label: 'band', ink: '#4A4458' },
+  'aventus': { form: 'flask', h: 2.25, r: .7, glass: 'clear', juice: '#C08C3E', cap: { form: 'column', material: 'black', h: .42, r: .2 }, label: 'plaque', ink: '#DDE2E8', plate: '#14161A' },
+  'santal-33': { form: 'column', h: 2.5, r: .44, glass: 'opaque', color: '#E4D6BC', juice: '#E4D6BC', cap: { form: 'puck', material: 'black', h: .2, r: .2 }, label: 'tall', ink: '#26221C', plate: '#E4D6BC' },
+  'la-nuit-lhomme': { form: 'column', h: 2.3, r: .54, glass: 'tinted', color: '#2A2532', juice: '#241F2E', cap: { form: 'column', material: 'silver', h: .4, r: .19 }, label: 'none', ring: 'silver' },
+  'le-male': { form: 'torso', h: 2.1, r: .62, glass: 'frosted', color: '#E8ECF6', juice: '#9A94CC', cap: { form: 'none' }, label: 'none' },
+  'spicebomb-extreme': { form: 'orb', h: 1.95, r: .7, glass: 'tinted', color: '#4A2A18', juice: '#7A3E1A', cap: { form: 'puck', material: 'silver', h: .3, r: .3 }, bandRings: ['silver', 'silver'], label: 'none' },
+  'shalimar': { form: 'urn', h: 2.05, r: .66, glass: 'clear', juice: '#D8A860', cap: { form: 'cone', material: 'navy', h: .4, r: .24 }, label: 'none', ring: 'gold' },
+  'br540': { form: 'slab', h: 2.25, r: .56, scaleX: .8, glass: 'clear', juice: '#D89A3E', cap: { form: 'puck', material: 'gold', h: .32, r: .28 }, label: 'plate', ink: '#7A5A1E', plate: '#F6ECD4' },
+  'prada-lhomme': { form: 'column', h: 2.3, r: .5, glass: 'clear', juice: '#EADFC8', cap: { form: 'disc', material: 'silver', h: .18, r: .24 }, label: 'band', ink: '#3E3E46' },
+  'angel': { form: 'star', h: 1.9, r: .78, glass: 'tinted', color: '#4A8AC8', juice: '#6FB0E0', cap: { form: 'none' }, label: 'none', ring: 'silver' },
+  'black-opium': { form: 'column', h: 2.4, r: .5, glass: 'tinted', color: '#17131A', speckle: '#F2EEF6', juice: '#3A2A20', cap: { form: 'sphere', material: 'pearl', h: .32, r: .26 }, label: 'none', ring: 'silver' },
+  'one-million': { form: 'ingot', h: 1.7, r: .7, glass: 'opaque', color: '#C89A28', juice: '#C89A28', cap: { form: 'none' }, label: 'plaque', ink: '#5A4210', plate: '#D8AE3E' },
+  'la-vie-est-belle': { form: 'flask', h: 2.15, r: .7, glass: 'clear', juice: { from: '#C07A4A', to: '#E0B070' }, cap: { form: 'sphere', material: 'silver', h: .3, r: .24 }, label: 'band', ink: '#6E4E66' },
+  'prada-candy': { form: 'slab', h: 1.9, r: .56, scaleX: .7, glass: 'opaque', color: '#B8202E', juice: '#B8202E', cap: { form: 'column', material: 'gold', h: .3, r: .18 }, label: 'none', ring: 'gold' },
+  'by-the-fireplace': { form: 'column', h: 2.3, r: .54, glass: 'tinted', color: '#D8CCB4', juice: '#8A5A33', cap: { form: 'puck', material: 'silver', h: .28, r: .26 }, label: 'plate', ink: '#3A322A', plate: '#F2ECDC' },
+  'not-a-perfume': { form: 'column', h: 2.35, r: .46, glass: 'clear', juice: '#F0EDE6', cap: { form: 'puck', material: 'silver', h: .26, r: .22 }, label: 'band', ink: '#4A4A4E' },
+  'sauvage': { form: 'column', h: 2.5, r: .5, glass: 'tinted', color: '#2A3E6E', juice: { from: '#1E325E', to: '#8FA8C8' }, cap: { form: 'column', material: 'silver', h: .34, r: .2 }, label: 'none', ring: 'silver' },
+  'eros': { form: 'column', h: 2.45, r: .5, glass: 'clear', juice: '#5EC8DC', cap: { form: 'column', material: 'gold', h: .44, r: .19 }, label: 'none', ring: 'gold' },
+  'good-girl': { form: 'slab', h: 2.2, r: .5, scaleX: .62, glass: 'tinted', color: '#1A1E30', juice: '#C9974C', cap: { form: 'cone', material: 'gold', h: .72, r: .16 }, label: 'none' },
+  'alien': { form: 'orb', h: 1.95, r: .7, glass: 'tinted', color: '#5A3A8A', juice: '#C8863B', cap: { form: 'puck', material: 'silver', h: .24, r: .24 }, label: 'none', ring: 'silver' },
+  'aqva-pour-homme': { form: 'orb', h: 1.95, r: .72, scaleX: .85, glass: 'clear', juice: '#5EB8A8', cap: { form: 'puck', material: 'silver', h: .26, r: .25 }, label: 'none', ring: 'silver' },
+  'chloe-edp': { form: 'ribbed', h: 2.2, r: .54, glass: 'clear', juice: '#EFC8C4', cap: { form: 'puck', material: 'silver', h: .26, r: .26 }, label: 'band', ink: '#8A6E72' }
+};

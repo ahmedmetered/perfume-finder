@@ -3,20 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perfume Finder · six questions to your next scent</title>
-<meta name="description" content="Answer six questions, watch the shelf reorder itself in real time, and meet a 3D bottle generated for your match. A curated library of 40 fragrances, running entirely in your browser.">
-<script>
-  // set appearance before first paint to avoid a flash
-  (function(){
-    var t = localStorage.getItem("pf-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    document.documentElement.dataset.theme = t;
-  })();
-</script>
-<meta name="theme-color" content="#F5F5F7">
+<title>Perfume Finder · your scent is at the bottom</title>
+<meta name="description" content="Answer six questions, or just describe what you want. The room darkens as you close in, and the winning bottle glows in the dark with its own light. A curated library of 40 fragrances, running entirely in your browser.">
+<meta name="theme-color" content="#0C1524">
 <meta property="og:title" content="Perfume Finder">
-<meta property="og:description" content="Six questions, real-time local scoring, and a 3D bottle generated for your match.">
+<meta property="og:description" content="Six questions down to your scent. The page darkens as you close in; the winner glows in the dark. Local, no API.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%230071E3' d='M12 2.5c3.6 4.7 6.5 8.6 6.5 12a6.5 6.5 0 1 1-13 0c0-3.4 2.9-7.3 6.5-12z'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%235EB8DC' d='M12 2.5c3.6 4.7 6.5 8.6 6.5 12a6.5 6.5 0 1 1-13 0c0-3.4 2.9-7.3 6.5-12z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Italiana&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <script type="importmap">
 {
@@ -29,87 +25,95 @@
 </head>
 <body>
 
-<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="motes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
 <header class="top">
   <div class="top-in">
-    <div class="who"><span class="dot"></span> perfume.finder</div>
-    <div class="top-right">
-      <nav>
-        <a href="#quiz" id="nav-quiz">The quiz</a>
-        <a href="#how">How it works</a>
-        <a href="https://ahmedmetered.github.io/" target="_blank" rel="noopener">Portfolio</a>
-      </nav>
-      <button id="theme-toggle" aria-label="Switch appearance" onclick="toggleTheme()">
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-      </button>
-    </div>
+    <span>perfume.finder</span>
+    <span class="depth-read"><span class="depth-bead"></span><span id="depth-read">surface · 0 m</span></span>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="https://ahmedmetered.github.io/" target="_blank" rel="noopener">Portfolio</a>
+    </nav>
   </div>
 </header>
 
+<div class="rail" aria-hidden="true">
+  <span class="d">descent</span>
+  <span class="wire"></span>
+  <span class="bead" id="rail-bead"></span>
+</div>
+
 <main class="wrap">
 
-  <div class="hero">
-    <span class="kicker">curated library · 40 fragrances</span>
-    <h1>Six questions.<br>One bottle at the end.</h1>
-    <p class="sub">Answer, or just <b>describe what you want in your own words</b>. The shelf reorders itself while you type, and the winner gets a <b>3D bottle generated just for it</b>. Everything runs in this page: no account, no tracking, no API.</p>
-    <div class="links" id="hero-cta">
-      <button class="btn primary" id="start-btn">Start the quiz</button>
-      <a class="btn" href="#how">How it works</a>
+  <div class="hero" id="hero">
+    <div>
+      <h1 class="display">Your scent<br>is at the<br>bottom.</h1>
+      <p class="sub">Answer six questions, or just <b>describe it in your own words</b>. Every answer takes the page deeper, and the shelf reorders itself while you type. At the bottom, <b>your bottle waits with its own light</b>.</p>
+      <div class="links" id="hero-cta">
+        <button class="btn primary" id="start-btn">Start the dive</button>
+        <a class="btn" href="#how">How it works</a>
+      </div>
+      <p class="micro">Scoring is local and instant · a curated library of 40 fragrances · nothing leaves this page.</p>
     </div>
-    <p class="micro">Scoring is local and instant. Free text is read against a small keyword map, also local.</p>
+    <div class="stage">
+      <canvas id="hero-canvas" aria-label="3D bottle preview, drag to rotate"></canvas>
+      <p class="stage-hint">drag to turn it · it slowly shows the shelf</p>
+    </div>
   </div>
 
   <section id="quiz" hidden>
-    <div class="progress">
-      <div class="segs" id="progress"></div>
-      <span id="step-count"></span>
+    <div class="step-head">
+      <span class="step-kicker" id="step-kicker">Question one</span>
+      <span class="step-count" id="step-count"></span>
     </div>
-    <div class="quiz-grid">
-      <div class="card" id="step-card"></div>
-      <aside class="live-panel" aria-live="polite">
-        <div class="live-head"><span class="dot"></span> Live analysis</div>
-        <p class="live-sub">recomputed on every answer · stays on this device</p>
-        <div class="live-rows" id="live-rows">
-          <div class="live-row"><span class="live-rank">1</span><span class="live-name">–</span><span class="live-pct">–</span><span class="live-house">–</span><span class="live-bar"><i style="width:0%"></i></span></div>
-          <div class="live-row"><span class="live-rank">2</span><span class="live-name">–</span><span class="live-pct">–</span><span class="live-house">–</span><span class="live-bar"><i style="width:0%"></i></span></div>
-          <div class="live-row"><span class="live-rank">3</span><span class="live-name">–</span><span class="live-pct">–</span><span class="live-house">–</span><span class="live-bar"><i style="width:0%"></i></span></div>
-        </div>
-        <div class="live-tags" id="live-tags"><span class="live-empty">type or answer to steer the shelf</span></div>
-        <div class="live-count" id="live-count">0 of 6 answered</div>
-      </aside>
+    <div class="depthbar"><i id="depthbar-fill" style="width:0%"></i></div>
+    <div class="card step-anim" id="step-card"></div>
+    <div class="wall" aria-live="polite">
+      <div class="wall-head">the wall, live</div>
+      <p class="wall-sub">recomputed on every answer and keystroke · stays on this device</p>
+      <div class="live-rows" id="live-rows">
+        <div class="live-row"><span class="live-rank">1</span><span class="live-name">–</span><span class="live-pct">–</span><span class="live-house">–</span><span class="live-bar"><i style="width:0%"></i></span></div>
+        <div class="live-row"><span class="live-rank">2</span><span class="live-name">–</span><span class="live-pct">–</span><span class="live-house">–</span><span class="live-bar"><i style="width:0%"></i></span></div>
+        <div class="live-row"><span class="live-rank">3</span><span class="live-name">–</span><span class="live-pct">–</span><span class="live-house">–</span><span class="live-bar"><i style="width:0%"></i></span></div>
+      </div>
+      <div class="live-tags" id="live-tags"><span class="live-empty">type or answer to steer the shelf</span></div>
     </div>
   </section>
 
   <section id="results" hidden>
-    <h2>Your shelf</h2>
-    <p class="sec-sub" id="results-kicker">Ranked best to least match. Click any row to bring its bottle to the stage.</p>
+    <div class="reveal-head">
+      <h2 class="r-name" id="r-name"></h2>
+      <p class="r-house" id="r-house"></p>
+      <div class="match-big"><span id="match-num">0</span><span class="pct">%</span> match<span id="match-note"></span></div>
+    </div>
 
-    <article class="hero-result card reveal" id="hero-result">
-      <div class="stage" id="stage">
+    <article class="hero-result" id="hero-result">
+      <div id="bottle-wrap">
         <canvas id="bottle-canvas" aria-label="3D bottle preview, drag to rotate"></canvas>
-        <p class="stage-hint" id="stage-hint">drag to rotate · it turns on its own</p>
+        <p class="stage-hint">drag to turn your match</p>
       </div>
       <div class="result-info">
-        <div class="match-big" id="match-big"></div>
-        <h3 id="r-name"></h3>
-        <p class="r-house" id="r-house"></p>
+        <div class="r-tags" id="r-tags"></div>
         <div class="r-whys" id="r-whys"></div>
         <p class="r-blurb" id="r-blurb"></p>
         <div class="r-meta">
-          <span>Budget band · <b id="r-tier"></b></span>
+          <span>Band · <b id="r-tier"></b></span>
           <span>Presence · <b id="r-intensity"></b></span>
+          <span id="r-depth"></span>
         </div>
         <div class="pyramid" id="r-pyramid"></div>
       </div>
     </article>
 
+    <h2 class="shelf-title">Closest under it</h2>
     <div class="runners" id="runners"></div>
+
+    <h2 class="shelf-title">The full shelf, best to least</h2>
     <div class="shelf" id="shelf"></div>
 
     <div class="results-foot">
-      <button class="btn primary" id="retake-btn">Retake the quiz</button>
+      <button class="btn primary" id="retake-btn">Dive again</button>
     </div>
   </section>
 
@@ -118,15 +122,15 @@
     <div class="trio">
       <div class="trio-col reveal" style="--i:0">
         <h3>Six questions, or words</h3>
-        <p>Every step is multiple choice with a <b>free-text alternative</b>. Typing "cozy vanilla for winter nights" feeds the same profile the buttons do.</p>
+        <p>Every step is multiple choice with a <b>free-text alternative</b>. What you pick in the buttons always wins; typed words only fill the gaps, so the engine can't misread you.</p>
       </div>
       <div class="trio-col reveal" style="--i:1">
         <h3>Scored where you sit</h3>
-        <p>Answers become a weighted profile: family, season, occasion, presence, budget. Forty fragrances are scored against it <b>in your browser, on every keystroke</b>.</p>
+        <p>Answers become a weighted profile across family, season, occasion, presence and budget. Forty fragrances are scored against it <b>in your browser, on every keystroke</b>. Anything over your stated budget sinks in the ranking, no matter how well it scores.</p>
       </div>
       <div class="trio-col reveal" style="--i:2">
         <h3>Bottles built, not photographed</h3>
-        <p>Each result gets a <b>procedurally generated 3D bottle</b>: lathe-turned glass, juice colored by scent family, a label drawn at runtime. No product photos, no brands copied.</p>
+        <p>Each result gets a <b>procedurally generated 3D bottle</b> echoing its real design: Le Male's torso, Angel's star, 1 Million's gold ingot, Sauvage's gradient column. Glass, juice and light, no product photos.</p>
       </div>
     </div>
   </section>
@@ -135,7 +139,7 @@
 
 <footer>
   <div class="wrap">
-    <p class="cta">The library holds 40 well-known fragrances, summarized from public note pyramids. Price tiers are rough bands, not quotes, and there are no affiliate links. Made by <a href="https://ahmedmetered.github.io/" target="_blank" rel="noopener">Ahmed Metered</a>.</p>
+    <p class="cta">The library holds 40 well-known fragrances, summarized from public note pyramids. Price bands are rough, not quotes, and there are no affiliate links. Made by <a href="https://ahmedmetered.github.io/" target="_blank" rel="noopener">Ahmed Metered</a>.</p>
     <p class="fine">Vanilla JS + three.js · no build step · everything local · <a href="https://github.com/ahmedmetered/perfume-finder" target="_blank" rel="noopener">source</a></p>
   </div>
 </footer>
