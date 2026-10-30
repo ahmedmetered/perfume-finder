@@ -197,9 +197,9 @@ function labelCanvas(frag, d, ink, plate) {
   g.fillStyle = ink;
   g.font = '500 48px "Hanken Grotesk", -apple-system, "Segoe UI", sans-serif';
   spaced(g, frag.house.toUpperCase(), 512, 106, 13);
-  g.font = '400 99px Italiana, Georgia, serif';
+  g.font = '400 99px Bodoni Moda, Georgia, serif';
   const name = frag.name.toUpperCase();
-  if (g.measureText(name).width > 900) g.font = '400 74px Italiana, Georgia, serif';
+  if (g.measureText(name).width > 900) g.font = '400 74px Bodoni Moda, Georgia, serif';
   g.fillText(name, 512, 384, 900);
   g.fillStyle = ink; g.globalAlpha = .65;
   g.font = '500 42px "Hanken Grotesk", -apple-system, "Segoe UI", sans-serif';

@@ -17,7 +17,7 @@ focused bottle and the primary action.
 
 ## Type
 
-- Display: **Italiana** (hairline fashion serif) — headline, question titles,
+- Display: **Bodoni Moda** (hairline fashion serif) — headline, question titles,
   result name, rank numerals, depth labels.
 - UI/data: **Hanken Grotesk** 400–700 — everything else, kept clear of the
   glowing object (Riley-gallery donation).
@@ -33,7 +33,7 @@ focused bottle and the primary action.
   glow in `--glow` when selected, free-text input under a hairline divider.
 - The wall: live top-3 ribbon; bars ease with ballistic overshoot
   (VU-bridge donation), each row lit in its own juice color.
-- Results: the abyss. Italiana name with a glow shadow, count-up match,
+- Results: the abyss. Bodoni Moda name with a glow shadow, count-up match,
   the bottle lit by a warm lamp key plus a juice-colored accent light,
   note pyramid as a specimen plate.
 - Motes: seven drifting specks (marine snow), opacity falls with depth.
@@ -50,6 +50,6 @@ Each of the 40 has a bespoke spec (`DESIGNS` in js/data.js) echoing the real
 bottle: ten lathe/extrude forms (column, slab, flask, torso, orb, urn, taper,
 ribbed, extruded star for Angel, beveled ingot for 1 Million), four glass
 finishes (clear, frosted, tinted, opaque), gradient juices, speckled caps,
-and canvas-baked labels in Italiana. Juice meshes are fully opaque by design:
+and canvas-baked labels in Bodoni Moda. Juice meshes are fully opaque by design:
 transmissive shells render in a depth-writing pass and would otherwise
 depth-reject a transparent liquid (the white-blowout bug).

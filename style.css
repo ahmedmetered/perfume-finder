@@ -74,7 +74,7 @@ main{position:relative;z-index:1}
 /* ---- hero: the surface ---- */
 .hero{min-height:100svh;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:30px;align-items:center;padding-top:76px}
 @media(max-width:880px){.hero{grid-template-columns:1fr;min-height:auto;padding-top:96px;gap:8px}}
-.display{font-family:'Italiana',Georgia,serif;font-weight:400;line-height:.98;letter-spacing:.005em;
+.display{font-family:"'"'"'Bodoni Moda'"'"",Georgia,serif;font-weight:400;line-height:.98;letter-spacing:.005em;
   font-size:clamp(56px,9.2vw,128px);text-wrap:balance;
   text-shadow:0 2px 40px rgba(10,30,50,.55)}
 .hero .sub{margin-top:22px;max-width:46ch;font-size:17px;color:var(--muted)}
@@ -111,14 +111,14 @@ main{position:relative;z-index:1}
 section{padding:0}
 #quiz{max-width:760px;margin:0 auto;padding:110px 0 60px}
 .step-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:14px}
-.step-kicker{font-family:'Italiana',Georgia,serif;font-size:30px;color:var(--ink)}
+.step-kicker{font-family:"'"'"'Bodoni Moda'"'"",Georgia,serif;font-size:30px;color:var(--ink)}
 .step-count{font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
 .depthbar{height:2px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:26px}
 .depthbar i{display:block;height:100%;background:linear-gradient(90deg,var(--lamp),var(--glow));
   transition:width .7s cubic-bezier(.3,.9,.3,1);box-shadow:0 0 8px color-mix(in srgb,var(--glow) 60%,transparent)}
 .card{background:color-mix(in srgb,var(--surface) 86%,transparent);border:1px solid var(--line);border-radius:18px;padding:30px 32px;
   -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
-.step-title{font-family:'Italiana',Georgia,serif;font-weight:400;font-size:clamp(30px,4vw,40px);line-height:1.05}
+.step-title{font-family:"'"'"'Bodoni Moda'"'"",Georgia,serif;font-weight:400;font-size:clamp(30px,4vw,40px);line-height:1.05}
 .step-sub{color:var(--muted);font-size:14.5px;margin-top:8px}
 .options{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px}
 .option{display:flex;flex-direction:column;gap:3px;align-items:flex-start;text-align:left;padding:14px 16px;border-radius:13px;
@@ -149,7 +149,7 @@ section{padding:0}
 .wall-sub{font-size:11.5px;color:var(--faint);margin-top:2px}
 .live-rows{margin-top:12px;display:flex;flex-direction:column;gap:11px}
 .live-row{display:grid;grid-template-columns:22px 1fr auto;gap:2px 10px;align-items:center}
-.live-rank{font-family:'Italiana',Georgia,serif;font-size:19px;color:var(--faint);grid-row:span 2}
+.live-rank{font-family:"'"'"'Bodoni Moda'"'"",Georgia,serif;font-size:19px;color:var(--faint);grid-row:span 2}
 .live-dot{width:8px;height:8px;border-radius:50%;background:var(--lc,#5EB8DC);box-shadow:0 0 8px var(--lc,#5EB8DC);position:absolute;left:-14px;top:6px}
 .live-name{font-size:13.5px;font-weight:600;position:relative;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .live-house{font-size:11px;color:var(--faint)}
@@ -166,12 +166,12 @@ section{padding:0}
 #results{padding:110px 0 0;max-width:1120px;margin:0 auto}
 #results .reveal-head{text-align:center;margin-bottom:8px}
 .arrived{font-size:12.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--lamp)}
-.r-name{font-family:'Italiana',Georgia,serif;font-weight:400;font-size:clamp(44px,7vw,84px);line-height:1;margin-top:10px;
+.r-name{font-family:"'"'"'Bodoni Moda'"'"",Georgia,serif;font-weight:400;font-size:clamp(44px,7vw,84px);line-height:1;margin-top:10px;
   text-shadow:0 0 60px color-mix(in srgb,var(--glow) 55%,transparent)}
 .r-house{color:var(--muted);font-size:14px;margin-top:10px}
 .r-house b{color:var(--ink)}
 .match-big{font-family:'Hanken Grotesk',sans-serif;font-size:clamp(34px,4.4vw,50px);font-weight:700;color:var(--lamp);margin-top:6px;letter-spacing:-.02em}
-.match-big .pct{font-family:'Italiana',Georgia,serif;font-weight:400;font-size:.82em}
+.match-big .pct{font-family:"'"'"'Bodoni Moda'"'"",Georgia,serif;font-weight:400;font-size:.82em}
 .match-big span{font-family:'Hanken Grotesk',sans-serif;font-size:14px;color:var(--muted);margin-left:6px;letter-spacing:.06em}
 
 .hero-result{margin-top:26px;display:grid;grid-template-columns:minmax(300px,460px) minmax(0,1fr);gap:14px;
@@ -214,7 +214,7 @@ section{padding:0}
 .shelf-row:first-child{border-top:none}
 .shelf-row:hover{background:rgba(120,150,190,.07)}
 .shelf-row.top1{background:color-mix(in srgb,var(--glow) 10%,transparent)}
-.shelf-rank{font-family:'Italiana',Georgia,serif;font-size:17px;color:var(--faint);font-variant-numeric:tabular-nums}
+.shelf-rank{font-family:"'"'"'Bodoni Moda'"'"",Georgia,serif;font-size:17px;color:var(--faint);font-variant-numeric:tabular-nums}
 .shelf-row img{width:34px;height:42px;object-fit:contain}
 .shelf-name{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .shelf-name em{display:block;font-style:normal;font-size:11px;font-weight:500;color:var(--faint)}
@@ -228,7 +228,7 @@ section{padding:0}
 
 /* ---- how / footer ---- */
 #how{max-width:760px;margin:0 auto;padding:90px 0 0}
-#how h2,.shelf-title{font-family:'Italiana',Georgia,serif;font-weight:400;font-size:34px}
+#how h2,.shelf-title{font-family:"'"'"'Bodoni Moda'"'"",Georgia,serif;font-weight:400;font-size:34px}
 .shelf-title{margin-top:44px}
 .trio{margin-top:18px;display:flex;flex-direction:column}
 .trio-col{padding:18px 0;border-top:1px solid var(--line)}
