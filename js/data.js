@@ -48,8 +48,8 @@ export const FRAGRANCES = [
     bottle: { shape: 'flask', cap: 'puck', metal: 'silver', juice: '#EDE37A' }
   },
   {
-    id: 'light-blue', name: 'Light Blue', house: 'Dolce & Gabbana', year: 2001, pop: 4,
-    gender: 'f', tier: 1, mix: { citrus: .65, aquatic: .35 },
+    id: 'light-blue', name: 'Light Blue Pour Homme', house: 'Dolce & Gabbana', year: 2001, pop: 4,
+    gender: 'm', tier: 1, mix: { citrus: .65, aquatic: .35 },
     seasons: { spring: .7, summer: 1, autumn: .3, winter: .1 },
     occasions: ['casual', 'office'], intensity: 1,
     notes: { top: ['sicilian lemon', 'apple', 'cedar'], heart: ['bamboo', 'jasmine', 'white rose'], base: ['cedar', 'musk', 'amber'] },
@@ -138,7 +138,7 @@ export const FRAGRANCES = [
     bottle: { shape: 'slab', cap: 'column', metal: 'gold', juice: '#E9A13B' }
   },
   {
-    id: 'gucci-bloom', name: 'Bloom', house: 'Gucci', year: 2017, pop: 4,
+    id: 'gucci-bloom', name: 'Bloom Parfum', house: 'Gucci', year: 2017, pop: 4,
     gender: 'f', tier: 2, mix: { floral: .85, musk: .15 },
     seasons: { spring: .7, summer: .6, autumn: .5, winter: .3 },
     occasions: ['date', 'casual'], intensity: 2,
@@ -237,7 +237,7 @@ export const FRAGRANCES = [
     bottle: { shape: 'flask', cap: 'puck', metal: 'silver', juice: '#A6A0D8' }
   },
   {
-    id: 'spicebomb-extreme', name: 'Spicebomb Extreme', house: 'Viktor & Rolf', year: 2015, pop: 4,
+    id: 'spicebomb-extreme', name: 'Spicebomb', house: 'Viktor & Rolf', year: 2015, pop: 4,
     gender: 'm', tier: 2, mix: { amber: .6, gourmand: .25, woody: .15 },
     seasons: { spring: .3, summer: .1, autumn: .7, winter: .9 },
     occasions: ['evening', 'date'], intensity: 3,
@@ -264,7 +264,7 @@ export const FRAGRANCES = [
     bottle: { shape: 'slab', cap: 'column', metal: 'gold', juice: '#E8B04B' }
   },
   {
-    id: 'prada-lhomme', name: 'L’Homme', house: 'Prada', year: 2016, pop: 3,
+    id: 'prada-lhomme', name: 'L’Eau', house: 'Prada', year: 2016, pop: 3,
     gender: 'm', tier: 2, mix: { musk: .35, floral: .4, amber: .25 },
     seasons: { spring: .7, summer: .4, autumn: .6, winter: .4 },
     occasions: ['office', 'date'], intensity: 1,
@@ -282,7 +282,7 @@ export const FRAGRANCES = [
     bottle: { shape: 'orb', cap: 'puck', metal: 'silver', juice: '#6FB7E8' }
   },
   {
-    id: 'black-opium', name: 'Black Opium', house: 'Yves Saint Laurent', year: 2014, pop: 4,
+    id: 'black-opium', name: 'Black Opium Le Parfum', house: 'Yves Saint Laurent', year: 2014, pop: 4,
     gender: 'f', tier: 2, mix: { gourmand: .65, amber: .35 },
     seasons: { spring: .4, summer: .2, autumn: .8, winter: .8 },
     occasions: ['evening', 'date'], intensity: 3,

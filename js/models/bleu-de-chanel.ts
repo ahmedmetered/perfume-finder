@@ -620,7 +620,7 @@ export function createBleuDeChanelModel(options: ProceduralModelOptions = {}): T
     node_body_0.position.set(0.0, 0.0, 0.0);
     node_body_0.rotation.set(0.0, 0.0, 0.0);
   }
-  node_body_0.userData.sculptComponent = {"id": "body", "name": "Bleu de Chanel body", "parent": null, "primitive": "lathe", "topologyClass": "continuous-sculpt", "topologyRationale": "blown-glass continuous surface from measured profile", "geometryDescriptor": {"latheProfile": {"points": [[0.0395, 0.0], [0.6162, 0.03], [0.6715, 0.1], [0.6715, 1.48], [0.6557, 1.58], [0.4345, 1.64], [0.2054, 1.69], [0.1738, 1.71]], "segments": 48}}, "transform": {"position": [0, 0, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 1, "height": 1, "depth": 1}, "attachment": {"parentId": "root", "parentSocket": "base-plate", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 0, 0], "localEnd": [0, 2.3, 0]}, "materialRefs": ["body-glass"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(28, 28, 44, 1.0)", "secondaryAlbedo": "rgba(35, 35, 51, 1.0)", "materialClass": "glass", "materialClassConfidence": 0.9}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "measured lathe: 21 points, neck at 0.71 of height"};
+  node_body_0.userData.sculptComponent = {"id": "body", "name": "Bleu de Chanel body", "parent": null, "primitive": "lathe", "topologyClass": "continuous-sculpt", "topologyRationale": "blown-glass continuous surface from measured profile", "geometryDescriptor": {"latheProfile": {"points": [[0.0395, 0.0], [0.6162, 0.03], [0.6715, 0.1], [0.6715, 1.48], [0.6557, 1.58], [0.4345, 1.64], [0.2054, 1.69], [0.1738, 1.71]], "segments": 48}}, "transform": {"position": [0, 0, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 1, "height": 1, "depth": 1}, "attachment": {"parentId": "root", "parentSocket": "base-plate", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 0, 0], "localEnd": [0, 2.3, 0]}, "materialRefs": ["body-glass"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(28, 28, 44, 1.0)", "secondaryAlbedo": "rgba(35, 35, 51, 1.0)", "materialClass": "glass", "materialClassConfidence": 0.9}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "measured lathe: 21 points, neck at 0.71 of height", "material": "body-glass"};
   node_body_0.userData.actionProfile = {"motion": "static-prop", "pivots": [], "colliders": []};
   (nodes["root"] ?? root).add(node_body_0);
   nodes["body"] = node_body_0;
@@ -641,12 +641,12 @@ export function createBleuDeChanelModel(options: ProceduralModelOptions = {}): T
   }
   mesh_body_0.castShadow = options.castShadow ?? true;
   mesh_body_0.receiveShadow = options.receiveShadow ?? true;
-  mesh_body_0.userData.sculptComponent = {"id": "body", "name": "Bleu de Chanel body", "parent": null, "primitive": "lathe", "topologyClass": "continuous-sculpt", "topologyRationale": "blown-glass continuous surface from measured profile", "geometryDescriptor": {"latheProfile": {"points": [[0.0395, 0.0], [0.6162, 0.03], [0.6715, 0.1], [0.6715, 1.48], [0.6557, 1.58], [0.4345, 1.64], [0.2054, 1.69], [0.1738, 1.71]], "segments": 48}}, "transform": {"position": [0, 0, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 1, "height": 1, "depth": 1}, "attachment": {"parentId": "root", "parentSocket": "base-plate", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 0, 0], "localEnd": [0, 2.3, 0]}, "materialRefs": ["body-glass"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(28, 28, 44, 1.0)", "secondaryAlbedo": "rgba(35, 35, 51, 1.0)", "materialClass": "glass", "materialClassConfidence": 0.9}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "measured lathe: 21 points, neck at 0.71 of height"};
+  mesh_body_0.userData.sculptComponent = {"id": "body", "name": "Bleu de Chanel body", "parent": null, "primitive": "lathe", "topologyClass": "continuous-sculpt", "topologyRationale": "blown-glass continuous surface from measured profile", "geometryDescriptor": {"latheProfile": {"points": [[0.0395, 0.0], [0.6162, 0.03], [0.6715, 0.1], [0.6715, 1.48], [0.6557, 1.58], [0.4345, 1.64], [0.2054, 1.69], [0.1738, 1.71]], "segments": 48}}, "transform": {"position": [0, 0, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 1, "height": 1, "depth": 1}, "attachment": {"parentId": "root", "parentSocket": "base-plate", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 0, 0], "localEnd": [0, 2.3, 0]}, "materialRefs": ["body-glass"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(28, 28, 44, 1.0)", "secondaryAlbedo": "rgba(35, 35, 51, 1.0)", "materialClass": "glass", "materialClassConfidence": 0.9}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "measured lathe: 21 points, neck at 0.71 of height", "material": "body-glass"};
   node_body_0.add(mesh_body_0);
   meshes["body"] = mesh_body_0;
   colliders["body"] = {};
 
-  const attachment_collar_1 = {"parentId": "body", "parentSocket": "neck-seat", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 1.66, 0], "localEnd": [0, 1.74, 0]};
+  const attachment_collar_1 = {"parentId": "body", "parentSocket": "neck-seat", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 1.66, 0], "localEnd": [0, 1.74, 0], "baseRadius": 0.3, "endRadius": 0.2325};
   const endpoint_collar_1 = makeAttachmentEndpoint(attachment_collar_1);
   const node_collar_1 = new THREE.Group();
   node_collar_1.name = "Collar band__pivot";
@@ -658,7 +658,7 @@ export function createBleuDeChanelModel(options: ProceduralModelOptions = {}): T
     node_collar_1.position.set(0.0, 1.7, 0.0);
     node_collar_1.rotation.set(0.0, 0.0, 0.0);
   }
-  node_collar_1.userData.sculptComponent = {"id": "collar", "name": "Collar band", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "constant band", "transform": {"position": [0, 1.7, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 0.79, "height": 0.08}, "attachment": {"parentId": "body", "parentSocket": "neck-seat", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 1.66, 0], "localEnd": [0, 1.74, 0]}, "materialRefs": ["collar-metal"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(173, 173, 173, 1.0)", "secondaryAlbedo": "rgba(35, 35, 51, 1.0)", "materialClass": "metal", "materialClassConfidence": 0.85}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "collar band"};
+  node_collar_1.userData.sculptComponent = {"id": "collar", "name": "Collar band", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "constant band", "transform": {"position": [0, 1.7, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 0.79, "height": 0.08}, "attachment": {"parentId": "body", "parentSocket": "neck-seat", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 1.66, 0], "localEnd": [0, 1.74, 0], "baseRadius": 0.3, "endRadius": 0.2325}, "materialRefs": ["collar-metal"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(173, 173, 173, 1.0)", "secondaryAlbedo": "rgba(35, 35, 51, 1.0)", "materialClass": "metal", "materialClassConfidence": 0.85}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "collar band", "material": "collar-metal"};
   node_collar_1.userData.actionProfile = {"motion": "static-prop", "pivots": [], "colliders": []};
   (nodes["body"] ?? root).add(node_collar_1);
   nodes["collar"] = node_collar_1;
@@ -670,7 +670,7 @@ export function createBleuDeChanelModel(options: ProceduralModelOptions = {}): T
   }
   const mesh_collar_1 = new THREE.Mesh(
     mesh_collar_1Geometry,
-    materialMap["body-glass"] ?? new THREE.MeshStandardMaterial({ color: 0x888888 })
+    materialMap["collar-metal"] ?? new THREE.MeshStandardMaterial({ color: 0x888888 })
   );
   mesh_collar_1.name = "Collar band";
   if (endpoint_collar_1) {
@@ -679,12 +679,12 @@ export function createBleuDeChanelModel(options: ProceduralModelOptions = {}): T
   }
   mesh_collar_1.castShadow = options.castShadow ?? true;
   mesh_collar_1.receiveShadow = options.receiveShadow ?? true;
-  mesh_collar_1.userData.sculptComponent = {"id": "collar", "name": "Collar band", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "constant band", "transform": {"position": [0, 1.7, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 0.79, "height": 0.08}, "attachment": {"parentId": "body", "parentSocket": "neck-seat", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 1.66, 0], "localEnd": [0, 1.74, 0]}, "materialRefs": ["collar-metal"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(173, 173, 173, 1.0)", "secondaryAlbedo": "rgba(35, 35, 51, 1.0)", "materialClass": "metal", "materialClassConfidence": 0.85}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "collar band"};
+  mesh_collar_1.userData.sculptComponent = {"id": "collar", "name": "Collar band", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "constant band", "transform": {"position": [0, 1.7, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 0.79, "height": 0.08}, "attachment": {"parentId": "body", "parentSocket": "neck-seat", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 1.66, 0], "localEnd": [0, 1.74, 0], "baseRadius": 0.3, "endRadius": 0.2325}, "materialRefs": ["collar-metal"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(173, 173, 173, 1.0)", "secondaryAlbedo": "rgba(35, 35, 51, 1.0)", "materialClass": "metal", "materialClassConfidence": 0.85}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "collar band", "material": "collar-metal"};
   node_collar_1.add(mesh_collar_1);
   meshes["collar"] = mesh_collar_1;
   colliders["collar"] = {};
 
-  const attachment_cap_2 = {"parentId": "body", "parentSocket": "cap-seat", "contactType": "overlap", "overlap": 0.03, "gapTolerance": 0.005, "localStart": [0, 1.7, 0], "localEnd": [0, 2.26, 0]};
+  const attachment_cap_2 = {"parentId": "body", "parentSocket": "cap-seat", "contactType": "overlap", "overlap": 0.03, "gapTolerance": 0.005, "localStart": [0, 1.7, 0], "localEnd": [0, 2.26, 0], "baseRadius": 0.375, "endRadius": 0.345};
   const endpoint_cap_2 = makeAttachmentEndpoint(attachment_cap_2);
   const node_cap_2 = new THREE.Group();
   node_cap_2.name = "Cap__pivot";
@@ -696,7 +696,7 @@ export function createBleuDeChanelModel(options: ProceduralModelOptions = {}): T
     node_cap_2.position.set(0.0, 1.98, 0.0);
     node_cap_2.rotation.set(0.0, 0.0, 0.0);
   }
-  node_cap_2.userData.sculptComponent = {"id": "cap", "name": "Cap", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "cylindrical cap from measured rows", "transform": {"position": [0, 1.98, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 0.75, "height": 0.5}, "attachment": {"parentId": "body", "parentSocket": "cap-seat", "contactType": "overlap", "overlap": 0.03, "gapTolerance": 0.005, "localStart": [0, 1.7, 0], "localEnd": [0, 2.26, 0]}, "materialRefs": ["cap-material"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(184, 184, 184, 1.0)", "secondaryAlbedo": "rgba(35, 35, 51, 1.0)", "materialClass": "plastic", "materialClassConfidence": 0.8}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "measured cap"};
+  node_cap_2.userData.sculptComponent = {"id": "cap", "name": "Cap", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "cylindrical cap from measured rows", "transform": {"position": [0, 1.98, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 0.75, "height": 0.5}, "attachment": {"parentId": "body", "parentSocket": "cap-seat", "contactType": "overlap", "overlap": 0.03, "gapTolerance": 0.005, "localStart": [0, 1.7, 0], "localEnd": [0, 2.26, 0], "baseRadius": 0.375, "endRadius": 0.345}, "materialRefs": ["cap-material"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(184, 184, 184, 1.0)", "secondaryAlbedo": "rgba(35, 35, 51, 1.0)", "materialClass": "plastic", "materialClassConfidence": 0.8}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "measured cap", "material": "cap-material"};
   node_cap_2.userData.actionProfile = {"motion": "static-prop", "pivots": [], "colliders": []};
   (nodes["body"] ?? root).add(node_cap_2);
   nodes["cap"] = node_cap_2;
@@ -708,7 +708,7 @@ export function createBleuDeChanelModel(options: ProceduralModelOptions = {}): T
   }
   const mesh_cap_2 = new THREE.Mesh(
     mesh_cap_2Geometry,
-    materialMap["body-glass"] ?? new THREE.MeshStandardMaterial({ color: 0x888888 })
+    materialMap["cap-material"] ?? new THREE.MeshStandardMaterial({ color: 0x888888 })
   );
   mesh_cap_2.name = "Cap";
   if (endpoint_cap_2) {
@@ -717,7 +717,7 @@ export function createBleuDeChanelModel(options: ProceduralModelOptions = {}): T
   }
   mesh_cap_2.castShadow = options.castShadow ?? true;
   mesh_cap_2.receiveShadow = options.receiveShadow ?? true;
-  mesh_cap_2.userData.sculptComponent = {"id": "cap", "name": "Cap", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "cylindrical cap from measured rows", "transform": {"position": [0, 1.98, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 0.75, "height": 0.5}, "attachment": {"parentId": "body", "parentSocket": "cap-seat", "contactType": "overlap", "overlap": 0.03, "gapTolerance": 0.005, "localStart": [0, 1.7, 0], "localEnd": [0, 2.26, 0]}, "materialRefs": ["cap-material"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(184, 184, 184, 1.0)", "secondaryAlbedo": "rgba(35, 35, 51, 1.0)", "materialClass": "plastic", "materialClassConfidence": 0.8}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "measured cap"};
+  mesh_cap_2.userData.sculptComponent = {"id": "cap", "name": "Cap", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "cylindrical cap from measured rows", "transform": {"position": [0, 1.98, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 0.75, "height": 0.5}, "attachment": {"parentId": "body", "parentSocket": "cap-seat", "contactType": "overlap", "overlap": 0.03, "gapTolerance": 0.005, "localStart": [0, 1.7, 0], "localEnd": [0, 2.26, 0], "baseRadius": 0.375, "endRadius": 0.345}, "materialRefs": ["cap-material"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(184, 184, 184, 1.0)", "secondaryAlbedo": "rgba(35, 35, 51, 1.0)", "materialClass": "plastic", "materialClassConfidence": 0.8}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "measured cap", "material": "cap-material"};
   node_cap_2.add(mesh_cap_2);
   meshes["cap"] = mesh_cap_2;
   colliders["cap"] = {};
@@ -733,7 +733,7 @@ export function createBleuDeChanelModel(options: ProceduralModelOptions = {}): T
     node_typography_3.position.set(0.0, 0.78, 0.687);
     node_typography_3.rotation.set(0.0, 0.0, 0.0);
   }
-  node_typography_3.userData.sculptComponent = {"id": "typography", "name": "Front print", "parent": "body", "primitive": "plane-card", "topologyClass": "material-only", "topologyRationale": "flat ink printed on the front face", "transform": {"position": [0, 0.78, 0.687], "rotation": [0, 0, 0]}, "dimensions": {"width": 1.027, "height": 0.62}, "attachment": {"parentId": "body", "parentSocket": "front-face", "contactType": "overlap", "overlap": 0.005, "gapTolerance": 0.002, "localStart": [0, 0.45, 0], "localEnd": [0, 1.12, 0]}, "materialRefs": ["print-ink"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(35, 35, 51, 1.0)", "secondaryAlbedo": "rgba(28, 28, 44, 1.0)", "materialClass": "plastic", "materialClassConfidence": 0.7}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "print lines: CHANEL / BLEU DE CHANEL"};
+  node_typography_3.userData.sculptComponent = {"id": "typography", "name": "Front print", "parent": "body", "primitive": "plane-card", "topologyClass": "material-only", "topologyRationale": "flat ink printed on the front face", "transform": {"position": [0, 0.78, 0.687], "rotation": [0, 0, 0]}, "dimensions": {"width": 1.027, "height": 0.62}, "attachment": {"parentId": "body", "parentSocket": "front-face", "contactType": "overlap", "overlap": 0.005, "gapTolerance": 0.002, "localStart": [0, 0.45, 0], "localEnd": [0, 1.12, 0]}, "materialRefs": ["print-ink"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(35, 35, 51, 1.0)", "secondaryAlbedo": "rgba(28, 28, 44, 1.0)", "materialClass": "plastic", "materialClassConfidence": 0.7}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "print lines: CHANEL / BLEU DE CHANEL", "material": "print-ink"};
   node_typography_3.userData.actionProfile = {"motion": "static-prop", "pivots": [], "colliders": []};
   (nodes["body"] ?? root).add(node_typography_3);
   nodes["typography"] = node_typography_3;
@@ -745,7 +745,7 @@ export function createBleuDeChanelModel(options: ProceduralModelOptions = {}): T
   }
   const mesh_typography_3 = new THREE.Mesh(
     mesh_typography_3Geometry,
-    materialMap["body-glass"] ?? new THREE.MeshStandardMaterial({ color: 0x888888 })
+    materialMap["print-ink"] ?? new THREE.MeshStandardMaterial({ color: 0x888888 })
   );
   mesh_typography_3.name = "Front print";
   if (endpoint_typography_3) {
@@ -754,7 +754,7 @@ export function createBleuDeChanelModel(options: ProceduralModelOptions = {}): T
   }
   mesh_typography_3.castShadow = options.castShadow ?? true;
   mesh_typography_3.receiveShadow = options.receiveShadow ?? true;
-  mesh_typography_3.userData.sculptComponent = {"id": "typography", "name": "Front print", "parent": "body", "primitive": "plane-card", "topologyClass": "material-only", "topologyRationale": "flat ink printed on the front face", "transform": {"position": [0, 0.78, 0.687], "rotation": [0, 0, 0]}, "dimensions": {"width": 1.027, "height": 0.62}, "attachment": {"parentId": "body", "parentSocket": "front-face", "contactType": "overlap", "overlap": 0.005, "gapTolerance": 0.002, "localStart": [0, 0.45, 0], "localEnd": [0, 1.12, 0]}, "materialRefs": ["print-ink"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(35, 35, 51, 1.0)", "secondaryAlbedo": "rgba(28, 28, 44, 1.0)", "materialClass": "plastic", "materialClassConfidence": 0.7}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "print lines: CHANEL / BLEU DE CHANEL"};
+  mesh_typography_3.userData.sculptComponent = {"id": "typography", "name": "Front print", "parent": "body", "primitive": "plane-card", "topologyClass": "material-only", "topologyRationale": "flat ink printed on the front face", "transform": {"position": [0, 0.78, 0.687], "rotation": [0, 0, 0]}, "dimensions": {"width": 1.027, "height": 0.62}, "attachment": {"parentId": "body", "parentSocket": "front-face", "contactType": "overlap", "overlap": 0.005, "gapTolerance": 0.002, "localStart": [0, 0.45, 0], "localEnd": [0, 1.12, 0]}, "materialRefs": ["print-ink"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(35, 35, 51, 1.0)", "secondaryAlbedo": "rgba(28, 28, 44, 1.0)", "materialClass": "plastic", "materialClassConfidence": 0.7}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "print lines: CHANEL / BLEU DE CHANEL", "material": "print-ink"};
   node_typography_3.add(mesh_typography_3);
   meshes["typography"] = mesh_typography_3;
   colliders["typography"] = {};

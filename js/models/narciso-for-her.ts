@@ -646,7 +646,7 @@ export function createForHerModel(options: ProceduralModelOptions = {}): THREE.G
   meshes["body"] = mesh_body_0;
   colliders["body"] = {};
 
-  const attachment_collar_1 = {"parentId": "body", "parentSocket": "neck-seat", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 1.515974649766511, 0], "localEnd": [0, 1.607974649766511, 0]};
+  const attachment_collar_1 = {"parentId": "body", "parentSocket": "neck-seat", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 1.515974649766511, 0], "localEnd": [0, 1.607974649766511, 0], "baseRadius": 0.4884, "endRadius": 0.3785};
   const endpoint_collar_1 = makeAttachmentEndpoint(attachment_collar_1);
   const node_collar_1 = new THREE.Group();
   node_collar_1.name = "Collar band__pivot";
@@ -658,7 +658,7 @@ export function createForHerModel(options: ProceduralModelOptions = {}): THREE.G
     node_collar_1.position.set(0.0, 1.561974649766511, 0.0);
     node_collar_1.rotation.set(0.0, 0.0, 0.0);
   }
-  node_collar_1.userData.sculptComponent = {"id": "collar", "name": "Collar band", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "constant band", "transform": {"position": [0, 1.561974649766511, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 0.65175, "height": 0.092}, "attachment": {"parentId": "body", "parentSocket": "neck-seat", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 1.515974649766511, 0], "localEnd": [0, 1.607974649766511, 0]}, "material": "collar-metal", "materialRefs": ["collar-metal"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(34, 33, 30, 1.0)", "secondaryAlbedo": "rgba(65, 55, 52, 1.0)", "materialClass": "metal", "materialClassConfidence": 0.85}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "collar band"};
+  node_collar_1.userData.sculptComponent = {"id": "collar", "name": "Collar band", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "constant band", "transform": {"position": [0, 1.561974649766511, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 0.65175, "height": 0.092}, "attachment": {"parentId": "body", "parentSocket": "neck-seat", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 1.515974649766511, 0], "localEnd": [0, 1.607974649766511, 0], "baseRadius": 0.4884, "endRadius": 0.3785}, "material": "collar-metal", "materialRefs": ["collar-metal"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(34, 33, 30, 1.0)", "secondaryAlbedo": "rgba(65, 55, 52, 1.0)", "materialClass": "metal", "materialClassConfidence": 0.85}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "collar band"};
   node_collar_1.userData.actionProfile = {"motion": "static-prop", "pivots": [], "colliders": []};
   (nodes["body"] ?? root).add(node_collar_1);
   nodes["collar"] = node_collar_1;
@@ -679,12 +679,12 @@ export function createForHerModel(options: ProceduralModelOptions = {}): THREE.G
   }
   mesh_collar_1.castShadow = options.castShadow ?? true;
   mesh_collar_1.receiveShadow = options.receiveShadow ?? true;
-  mesh_collar_1.userData.sculptComponent = {"id": "collar", "name": "Collar band", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "constant band", "transform": {"position": [0, 1.561974649766511, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 0.65175, "height": 0.092}, "attachment": {"parentId": "body", "parentSocket": "neck-seat", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 1.515974649766511, 0], "localEnd": [0, 1.607974649766511, 0]}, "material": "collar-metal", "materialRefs": ["collar-metal"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(34, 33, 30, 1.0)", "secondaryAlbedo": "rgba(65, 55, 52, 1.0)", "materialClass": "metal", "materialClassConfidence": 0.85}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "collar band"};
+  mesh_collar_1.userData.sculptComponent = {"id": "collar", "name": "Collar band", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "constant band", "transform": {"position": [0, 1.561974649766511, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 0.65175, "height": 0.092}, "attachment": {"parentId": "body", "parentSocket": "neck-seat", "contactType": "overlap", "overlap": 0.02, "gapTolerance": 0.005, "localStart": [0, 1.515974649766511, 0], "localEnd": [0, 1.607974649766511, 0], "baseRadius": 0.4884, "endRadius": 0.3785}, "material": "collar-metal", "materialRefs": ["collar-metal"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(34, 33, 30, 1.0)", "secondaryAlbedo": "rgba(65, 55, 52, 1.0)", "materialClass": "metal", "materialClassConfidence": 0.85}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "collar band"};
   node_collar_1.add(mesh_collar_1);
   meshes["collar"] = mesh_collar_1;
   colliders["collar"] = {};
 
-  const attachment_cap_2 = {"parentId": "body", "parentSocket": "cap-seat", "contactType": "overlap", "overlap": 0.03, "gapTolerance": 0.005, "localStart": [0, 1.561974649766511, 0], "localEnd": [0, 2.3, 0]};
+  const attachment_cap_2 = {"parentId": "body", "parentSocket": "cap-seat", "contactType": "overlap", "overlap": 0.03, "gapTolerance": 0.005, "localStart": [0, 1.561974649766511, 0], "localEnd": [0, 2.3, 0], "baseRadius": 0.6105, "endRadius": 0.5617};
   const endpoint_cap_2 = makeAttachmentEndpoint(attachment_cap_2);
   const node_cap_2 = new THREE.Group();
   node_cap_2.name = "Cap__pivot";
@@ -696,7 +696,7 @@ export function createForHerModel(options: ProceduralModelOptions = {}): THREE.G
     node_cap_2.position.set(0.0, 1.9309873248832554, 0.0);
     node_cap_2.rotation.set(0.0, 0.0, 0.0);
   }
-  node_cap_2.userData.sculptComponent = {"id": "cap", "name": "Cap", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "cylindrical cap from measured rows", "transform": {"position": [0, 1.9309873248832554, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 1.221, "height": 0.738}, "attachment": {"parentId": "body", "parentSocket": "cap-seat", "contactType": "overlap", "overlap": 0.03, "gapTolerance": 0.005, "localStart": [0, 1.561974649766511, 0], "localEnd": [0, 2.3, 0]}, "material": "cap-material", "materialRefs": ["cap-material"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(12, 12, 10, 1.0)", "secondaryAlbedo": "rgba(65, 55, 52, 1.0)", "materialClass": "plastic", "materialClassConfidence": 0.8}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "measured cap"};
+  node_cap_2.userData.sculptComponent = {"id": "cap", "name": "Cap", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "cylindrical cap from measured rows", "transform": {"position": [0, 1.9309873248832554, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 1.221, "height": 0.738}, "attachment": {"parentId": "body", "parentSocket": "cap-seat", "contactType": "overlap", "overlap": 0.03, "gapTolerance": 0.005, "localStart": [0, 1.561974649766511, 0], "localEnd": [0, 2.3, 0], "baseRadius": 0.6105, "endRadius": 0.5617}, "material": "cap-material", "materialRefs": ["cap-material"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(12, 12, 10, 1.0)", "secondaryAlbedo": "rgba(65, 55, 52, 1.0)", "materialClass": "plastic", "materialClassConfidence": 0.8}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "measured cap"};
   node_cap_2.userData.actionProfile = {"motion": "static-prop", "pivots": [], "colliders": []};
   (nodes["body"] ?? root).add(node_cap_2);
   nodes["cap"] = node_cap_2;
@@ -717,7 +717,7 @@ export function createForHerModel(options: ProceduralModelOptions = {}): THREE.G
   }
   mesh_cap_2.castShadow = options.castShadow ?? true;
   mesh_cap_2.receiveShadow = options.receiveShadow ?? true;
-  mesh_cap_2.userData.sculptComponent = {"id": "cap", "name": "Cap", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "cylindrical cap from measured rows", "transform": {"position": [0, 1.9309873248832554, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 1.221, "height": 0.738}, "attachment": {"parentId": "body", "parentSocket": "cap-seat", "contactType": "overlap", "overlap": 0.03, "gapTolerance": 0.005, "localStart": [0, 1.561974649766511, 0], "localEnd": [0, 2.3, 0]}, "material": "cap-material", "materialRefs": ["cap-material"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(12, 12, 10, 1.0)", "secondaryAlbedo": "rgba(65, 55, 52, 1.0)", "materialClass": "plastic", "materialClassConfidence": 0.8}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "measured cap"};
+  mesh_cap_2.userData.sculptComponent = {"id": "cap", "name": "Cap", "parent": "body", "primitive": "cylinder", "topologyClass": "assembled-solid", "topologyRationale": "cylindrical cap from measured rows", "transform": {"position": [0, 1.9309873248832554, 0], "rotation": [0, 0, 0]}, "dimensions": {"width": 1.221, "height": 0.738}, "attachment": {"parentId": "body", "parentSocket": "cap-seat", "contactType": "overlap", "overlap": 0.03, "gapTolerance": 0.005, "localStart": [0, 1.561974649766511, 0], "localEnd": [0, 2.3, 0], "baseRadius": 0.6105, "endRadius": 0.5617}, "material": "cap-material", "materialRefs": ["cap-material"], "localFeatures": [], "colorMaterialRecipe": {"dominantAlbedo": "rgba(12, 12, 10, 1.0)", "secondaryAlbedo": "rgba(65, 55, 52, 1.0)", "materialClass": "plastic", "materialClassConfidence": 0.8}, "actionProfile": {"motion": "static-prop", "pivots": [], "colliders": []}, "notes": "measured cap"};
   node_cap_2.add(mesh_cap_2);
   meshes["cap"] = mesh_cap_2;
   colliders["cap"] = {};
